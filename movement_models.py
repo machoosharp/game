@@ -9,13 +9,7 @@ from pygame import (
     K_UP,
     K_DOWN,
     K_LEFT,
-    K_RIGHT,
-    K_r,
-    K_LSHIFT,
-    K_SPACE,
-    K_ESCAPE,
-    KEYDOWN,
-    QUIT
+    K_RIGHT
 )
 
 U=0
