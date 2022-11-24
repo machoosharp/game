@@ -16,6 +16,63 @@ D=1
 L=2
 R=3
 
+def UDLR(self):
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP]:
+        self.direction.y = -1
+        self.action = 'up'
+        self.status = 'move'
+    elif keys[pygame.K_DOWN]:
+        self.direction.y = 1
+        self.action = 'down'
+        self.status = 'move'
+    else:
+        self.direction.y = 0
+    if keys[pygame.K_RIGHT]:
+        self.direction.x = 1
+        self.action = 'right'
+        self.status = 'move'
+    elif keys[pygame.K_LEFT]:
+        self.direction.x = -1
+        self.action = 'left'
+        self.status = 'move'
+    else:
+        self.direction.x = 0
+    if self.direction.magnitude() <= 0.1:
+        self.status = 'idle'
+
+def WASD(self):
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        self.direction.y = -1
+        self.action = 'up'
+        self.status = 'move'
+    elif keys[pygame.K_s]:
+        self.direction.y = 1
+        self.action = 'down'
+        self.status = 'move'
+    else:
+        self.direction.y = 0
+    if keys[pygame.K_d]:
+        self.direction.x = 1
+        self.action = 'right'
+        self.status = 'move'
+    elif keys[pygame.K_a]:
+        self.direction.x = -1
+        self.action = 'left'
+        self.status = 'move'
+    else:
+        self.direction.x = 0
+    if self.direction.magnitude() <= 0.1:
+        self.status = 'idle'
+
+def shift_run(self):
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LSHIFT]:
+        self.speed = 500
+    else:
+        self.speed = 200
+
 def orbit(loc_profile, vel_profile, accel:float=0.2, friction=1):
 
         keys = pygame.key.get_pressed()
