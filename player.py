@@ -5,7 +5,6 @@ import pygame
 from pygame.font import SysFont
 from pygame import freetype
 import random
-from display import Display
 from movement_models import orbit
 from config import *
 from support import import_folder

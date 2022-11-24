@@ -1,6 +1,5 @@
 import pygame, sys
 from config import *
-from display import Display
 from player import Player
 from level import Level
 

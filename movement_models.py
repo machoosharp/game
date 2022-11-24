@@ -3,7 +3,6 @@ import math
 import pygame
 from pygame import freetype
 import random
-from display import Display
 from config import *
 from pygame import (
     K_UP,
