@@ -28,11 +28,12 @@ class Player(pygame.sprite.Sprite):
 
         self.import_assets()
 
-        self.status = 'down'
-        self.frame_index = 0
+        self.action = 'down'
+        self.status = 'idle'
+        self.frame_index = 0.9
 
         self.direction = pygame.math.Vector2(0,0)
-        self.image = self.animations[self.status][self.frame_index]
+        self.image = self.animations[self.action][int(self.frame_index)]
         self.rect = self.image.get_rect(center=pos)
         self.pos = pygame.math.Vector2(self.rect.center)
 
@@ -52,7 +53,9 @@ class Player(pygame.sprite.Sprite):
 
     def animate(self, dt):
         self.frame_index += 4 * dt
-        self.image = self.animations[self.status][int(self.frame_index) % 4]
+        if self.status == 'idle':
+            self.frame_index = 0.9
+        self.image = self.animations[self.action][int(self.frame_index) % 4]
 
     def input(self):
 
@@ -60,21 +63,28 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_UP]:
             self.direction.y = -1
-            self.status = 'up'
+            self.action = 'up'
+            self.status = 'move'
         elif keys[pygame.K_DOWN]:
             self.direction.y = 1
-            self.status = 'down'
+            self.action = 'down'
+            self.status = 'move'
         else:
             self.direction.y = 0
 
         if keys[pygame.K_RIGHT]:
             self.direction.x = 1
-            self.status = 'right'
+            self.action = 'right'
+            self.status = 'move'
         elif keys[pygame.K_LEFT]:
             self.direction.x = -1
-            self.status = 'left'
+            self.action = 'left'
+            self.status = 'move'
         else:
             self.direction.x = 0
+        
+        if self.direction.magnitude() <= 0.1:
+            self.status = 'idle'
 
     def move(self, dt):
 
