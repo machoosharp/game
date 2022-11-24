@@ -1,6 +1,6 @@
 import numpy as np
 import os
-import math
+from pygame import math as pmath
 import pygame
 from pygame.font import SysFont
 from pygame import freetype
@@ -9,18 +9,8 @@ from movement_models import orbit, UDLR, WASD, shift_run
 from config import *
 from timer import Timer
 from support import import_folder
-from pygame import (
-    K_UP,
-    K_DOWN,
-    K_LEFT,
-    K_RIGHT,
-    K_r,
-    K_LSHIFT,
-    K_SPACE,
-    K_ESCAPE,
-    KEYDOWN,
-    QUIT
-)
+from pygame import K_r, K_LSHIFT, K_SPACE
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group):
@@ -28,21 +18,24 @@ class Player(pygame.sprite.Sprite):
 
         self.import_assets()
 
-        self.action = 'down'
-        self.status = 'idle'
-        self.selected_tool = 'none'
-        self.frame_index = 0.9
+        self.action         = 'down'
+        self.status         = 'idle'
+        self.selected_tool  = 'none'
+        self.frame_index    = 0.9
 
-        self.direction = pygame.math.Vector2(0,0)
-        self.image = self.animations[self.action][int(self.frame_index)]
-        self.rect = self.image.get_rect(center=pos)
-        self.pos = pygame.math.Vector2(self.rect.center)
+        self.direction  = pmath.Vector2(0,0)
+        self.image      = self.animations[self.action][int(self.frame_index)]
+        self.rect       = self.image.get_rect(center=pos)
+        self.pos        = pmath.Vector2(self.rect.center)
 
         self.timers = {
-            'tool use': Timer(350,self.use_tool)
+            'tool use': Timer(350, self.use_tool)
         }
 
         self.speed = 200
+    
+    def use_tool(self):
+        print(self.selected_tool)
 
     def import_assets(self):
         self.animations = {
@@ -55,9 +48,6 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = 'game/graphics/character/' + animation
             self.animations[animation] = import_folder(full_path)
-
-    def use_tool(self):
-        print(self.selected_tool)
 
     def animate(self, dt):
         self.frame_index += 4 * dt
@@ -76,11 +66,15 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE]:
             self.timers['tool use'].activate()
             self.direction = pygame.math.Vector2()
+            self.frame_index = 0
 
     def get_status(self):
         if self.timers['tool use'].active:
             self.status = 'right_axe'
-            print('tool is being used')
+
+    def update_timers(self):
+        for timer in self.timers.values():
+            timer.update()
 
     def move(self, dt):
 
@@ -98,6 +92,7 @@ class Player(pygame.sprite.Sprite):
         self.get_status()
         self.move(dt)
         self.animate(dt)
+        self.update_timers()
 
 U=0
 D=1

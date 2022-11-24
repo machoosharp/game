@@ -73,53 +73,53 @@ def shift_run(self):
     else:
         self.speed = 200
 
-def orbit(loc_profile, vel_profile, accel:float=0.2, friction=1):
+def orbit(loc_profile, vel_profile, accel: float = 0.2, friction=1):
 
-        keys = pygame.key.get_pressed()
-        mous_x, mous_y = pygame.mouse.get_pos()
-        clicked = pygame.mouse.get_pressed()[0]
+    keys = pygame.key.get_pressed()
+    mous_x, mous_y = pygame.mouse.get_pos()
+    clicked = pygame.mouse.get_pressed()[0]
 
-        x, y = loc_profile
-        xvel, yvel = vel_profile
+    x, y = loc_profile
+    xvel, yvel = vel_profile
 
-        # if clicked:
-        #     xvel += accel * (1 if (mous_x - x) > 0 else -1)
-        #     yvel += accel * (1 if (mous_y - y) > 0 else -1)
-        # else:
-        #     xvel += accel * (-1 if xvel > 0 else 1)
-        #     yvel += accel * (-1 if yvel > 0 else 1)
+    # if clicked:
+    #     xvel += accel * (1 if (mous_x - x) > 0 else -1)
+    #     yvel += accel * (1 if (mous_y - y) > 0 else -1)
+    # else:
+    #     xvel += accel * (-1 if xvel > 0 else 1)
+    #     yvel += accel * (-1 if yvel > 0 else 1)
 
-        if clicked:
+    if clicked:
 
-            xadder = accel * ((mous_x - x) * friction)
-            
-            if xvel < 0 and (mous_x - x) > 0:
-                xadder += 1*xadder
-            if xvel > 0 and (mous_x - x) < 0:
-                xadder += 1*xadder
-            xvel += xadder
+        xadder = accel * ((mous_x - x) * friction)
+        
+        if xvel < 0 and (mous_x - x) > 0:
+            xadder += 1*xadder
+        if xvel > 0 and (mous_x - x) < 0:
+            xadder += 1*xadder
+        xvel += xadder
 
-            yadder = accel * ((mous_y - y) * friction)
-            
-            if yvel < 0 and (mous_y - y) > 0:
-                yadder += 1*yadder
-            if yvel > 0 and (mous_y - y) < 0:
-                yadder += 1*yadder
-            yvel += yadder
+        yadder = accel * ((mous_y - y) * friction)
+        
+        if yvel < 0 and (mous_y - y) > 0:
+            yadder += 1*yadder
+        if yvel > 0 and (mous_y - y) < 0:
+            yadder += 1*yadder
+        yvel += yadder
 
-        else:
-            xvel += accel * (-1 if xvel > 0 else 1)
-            yvel += accel * (-1 if yvel > 0 else 1)
+    else:
+        xvel += accel * (-1 if xvel > 0 else 1)
+        yvel += accel * (-1 if yvel > 0 else 1)
 
-        if not abs(xvel) > accel and not clicked:
-            xvel = 0
-        if not abs(yvel) > accel and not clicked:
-            yvel = 0
+    if not abs(xvel) > accel and not clicked:
+        xvel = 0
+    if not abs(yvel) > accel and not clicked:
+        yvel = 0
 
-        xvel = round(xvel,3)
-        yvel = round(yvel,3)
+    xvel = round(xvel,3)
+    yvel = round(yvel,3)
 
-        return xvel, yvel
+    return xvel, yvel
 
 def keyboard_control(loc_profile, vel_profile, accel=0.2, max_vel=5):
 
