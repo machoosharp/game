@@ -12,7 +12,6 @@ class Level:
         self.all_sprites = pygame.sprite.Group()
 
         self.player = Player((640,360), self.all_sprites)
-        self.tool_selector = ToolSelector(['hand', 'bow', 'sword', 'pickaxe'])
         self.overlay = Overlay(self.player)
 
     def run(self, dt):
@@ -22,6 +21,5 @@ class Level:
         # Sprites
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt)
-        
-        # Gui
-        self.tool_selector.update()
+
+        self.overlay.display()

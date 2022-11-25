@@ -13,7 +13,7 @@ class ToolSelector(pygame.Surface):
         self.screen  = pygame.display.get_surface()
         self.visible = False
         self.tools   = tools
-        self.selected_tool = ''
+        self.selected_tool = tools[0]
 
         self.tool_buttons = {}
 

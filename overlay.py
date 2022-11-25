@@ -15,4 +15,9 @@ class Overlay:
 
         print(self.tools_surf)
         print(self.seeds_surf)
+    
+    def display(self):
+
+        tool_surf = self.tools_surf[self.player.tool_selection.selected_tool]
+        self.display_surface.blit(tool_surf,(0,0))
 
