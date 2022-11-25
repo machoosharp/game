@@ -34,6 +34,8 @@ class Player(pygame.sprite.Sprite):
             'tool use': Timer(350, self.use_tool)
         }
 
+        self.seeds          = ['car', 'butter']
+
         self.tools          = ['hand', 'hoe', 'axe']
         self.tool_selection = ToolSelector(self.tools)
     
