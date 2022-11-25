@@ -10,6 +10,7 @@ from config import *
 from timer import Timer
 from support import import_folder
 from pygame import K_r, K_LSHIFT, K_SPACE
+from gui import ToolSelector
 
 
 class Player(pygame.sprite.Sprite):
@@ -20,22 +21,24 @@ class Player(pygame.sprite.Sprite):
 
         self.action         = 'down'
         self.status         = 'idle'
-        self.selected_tool  = 'none'
         self.frame_index    = 0.9
+        self.gui            = ''
 
         self.direction  = pmath.Vector2(0,0)
         self.image      = self.animations[self.action][int(self.frame_index)]
         self.rect       = self.image.get_rect(center=pos)
         self.pos        = pmath.Vector2(self.rect.center)
+        self.speed = 200
 
         self.timers = {
             'tool use': Timer(350, self.use_tool)
         }
 
-        self.speed = 200
+        self.tools          = ['hand', 'hoe', 'axe']
+        self.tool_selection = ToolSelector(self.tools)
     
     def use_tool(self):
-        print(self.selected_tool)
+        print(self.status)
 
     def import_assets(self):
         self.animations = {
@@ -57,20 +60,24 @@ class Player(pygame.sprite.Sprite):
 
     def input(self):
 
+        # Run WASD control profile
         WASD(self)
 
+        # Run Shift Run profile
         shift_run(self)
 
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_SPACE]:
             self.timers['tool use'].activate()
             self.direction = pygame.math.Vector2()
             self.frame_index = 0
 
+    def get_tool(self):
+        self.tool_selection.update()
+
     def get_status(self):
         if self.timers['tool use'].active:
-            self.status = 'right_axe'
+            self.status = self.tool_selection.selected_tool
 
     def update_timers(self):
         for timer in self.timers.values():
@@ -89,6 +96,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self, dt):
         self.input()
+        self.tool_selection.update()
         self.get_status()
         self.move(dt)
         self.animate(dt)
