@@ -17,7 +17,7 @@ class ToolSelector(pygame.Surface):
 
         self.tool_buttons = {}
 
-        self.fill((100,100,100))
+        self.fill((100,100,100,100))
 
     def show(self):
         self.visible = True
@@ -42,10 +42,10 @@ class ToolSelector(pygame.Surface):
         self.fill(INVIS)
     
     def draw(self):
-        pygame.draw.rect(self.screen, (0,100,200), self.rect)
+        pygame.draw.rect(self.screen, (0,100,200,100), self.rect)
         for tool, rect in self.tool_buttons.items():
-            text = self.font.render(tool, True, (0,0,0))
-            pygame.draw.rect(self.screen, (200,255,220), rect)
+            text = self.font.render(tool, True, (0,0,0,100))
+            pygame.draw.rect(self.screen, (200,255,220,100), rect)
             w, h = text.get_size()
             self.screen.blit(text, (rect.x + (rect.w/2) - (w/2), rect.y + (rect.h/2) - (h/2)))
 

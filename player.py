@@ -35,8 +35,8 @@ class Player(pygame.sprite.Sprite):
         }
 
         self.seeds          = ['car', 'butter']
-
         self.tools          = ['hand', 'hoe', 'axe']
+
         self.tool_selection = ToolSelector(self.tools)
     
     def use_tool(self):
@@ -171,5 +171,5 @@ class NPC(pygame.sprite.Sprite):
         self.x, self.y = loc
         self.w, self.h = shape
         self.vel       = vel
-    
+
 
