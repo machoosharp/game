@@ -65,7 +65,7 @@ class ToolSelector(pygame.Surface):
             self.get_tool()
 
         if keys[pygame.K_p]:
-            self.tools = ['hand', 'knife', 'penis', 'Big Dong','chicken', 'gun']
+            self.tools = ['hand', 'knife', 'penis', 'Big Dong', 'chicken', 'gun']
 
     def get_tool(self):
         mousx, mousy = pygame.mouse.get_pos()

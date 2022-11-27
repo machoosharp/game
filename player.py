@@ -38,6 +38,7 @@ class Player(pygame.sprite.Sprite):
         self.tools          = ['hand', 'hoe', 'axe']
 
         self.tool_selection = ToolSelector(self.tools)
+        self.z  = LAYERS['MAIN']
     
     def use_tool(self):
         print(self.status)
