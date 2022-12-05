@@ -18,3 +18,9 @@ LAYERS = {
     'OVERLAY':    4,
     'GUI':        5    
 }
+
+
+RENDER_DISTANCE = 16
+
+# Pixels per unit of measurment. (Ex. the coordinates x=2 y=6 would be 200, 600 in pixel values if PPU=100)
+PPU = 64

@@ -2,14 +2,15 @@ import pygame, sys
 from config import *
 from player import Player
 from level import Level
+from random import randint
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((SCREENWIDTH,SCREENHIGHT))
+        self.screen = pygame.display.set_mode((0,0), flags=pygame.RESIZABLE)
         pygame.display.set_caption('Something')
         self.clock = pygame.time.Clock()
-        self.level = Level()
+        self.level = Level(randint(1,10000))
 
     def run(self):
         while True:
