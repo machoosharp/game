@@ -81,5 +81,19 @@ class ToolSelector(pygame.Surface):
                     return
 
 
+class ToolBuilder(pygame.Surface):
+    def __init__(self, player):
+        super().__init__((GUI_LEN,GUI_LEN))
+
+        self.font    = pygame.font.SysFont(None, 24)
+        self.rect    = pygame.Rect((ORIGX, ORIGY), (GUI_LEN, GUI_LEN))
+        self.screen  = pygame.display.get_surface()
+        self.visible = False
+        self.tools   = tools
+        self.selected_tool = tools[0]
+
+        self.tool_buttons = {}
+
+        self.fill((100,100,100,100))
 
 
